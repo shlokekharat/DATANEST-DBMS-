@@ -6,46 +6,156 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
   --font-display: "Space Grotesk", sans-serif;
 
-  /* Elegant Dark Theme Color Mapping */
-  --color-slate-950: #0a0a0c;
-  --color-slate-900: #111114;
+  /* Overriding default gray and slate variables for perfect site-wide adaptation */
+  --color-slate-950: #0B1020;
+  --color-slate-900: #151C33;
   --color-slate-850: rgba(255, 255, 255, 0.08);
   --color-slate-800: rgba(255, 255, 255, 0.05);
+
+  --color-gray-950: #0B1020;
+  --color-gray-900: #151C33;
+  --color-gray-50: #F8FAFC;
+  --color-gray-100: rgba(255, 255, 255, 0.05);
+  --color-gray-150: rgba(255, 255, 255, 0.1);
+  --color-gray-200: rgba(255, 255, 255, 0.15);
   
-  --color-gray-950: #0a0a0c;
-  --color-gray-900: #111114;
+  /* Midnight Sapphire Brand Specific Colors */
+  --color-sapphire-bg: #0B1020;
+  --color-sapphire-card: #151C33;
+  --color-sapphire-glass: rgba(255, 255, 255, 0.08);
+  --color-sapphire-border: rgba(255, 255, 255, 0.15);
+  --color-sapphire-primary: #4F8CFF;
+  --color-sapphire-secondary: #00D9FF;
+  --color-sapphire-glow: #6C63FF;
+  --color-sapphire-text: #F8FAFC;
+  --color-sapphire-subtext: #94A3B8;
+  --color-sapphire-success: #22C55E;
+  --color-sapphire-warning: #F59E0B;
+  --color-sapphire-danger: #EF4444;
 }
 
-html {
+html, body {
+  background-color: #0B1020 !important;
+  color: #CBD5E1 !important;
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
 }
 
-/* Glassmorphism custom helpers mapped to Elegant Dark Theme */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+h1, h2, h3, h4, h5, h6 {
+  color: #F8FAFC !important;
 }
 
-.dark .glass-panel {
-  background: #111114;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+/* Primary Button with Gradient Shift on Hover */
+.btn-primary {
+  background-color: #4F8CFF !important;
+  color: #FFFFFF !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.btn-primary:hover {
+  background: linear-gradient(90deg, #00D9FF, #6C63FF) !important;
+  box-shadow: 0 0 22px rgba(0, 217, 255, 0.4) !important;
+}
+
+/* Glassmorphism custom helpers mapped to Premium Midnight Sapphire */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px 0 rgba(11, 16, 32, 0.4);
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 0.75rem;
 }
 
-.dark .glass-card {
-  background: #151518;
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+/* Neon Glow Effect Helpers */
+.premium-gradient-text {
+  background: linear-gradient(90deg, #00D9FF, #4F8CFF, #6C63FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.neon-glow-primary {
+  box-shadow: 0 0 25px rgba(79, 140, 255, 0.3);
+  border-color: rgba(79, 140, 255, 0.45) !important;
+}
+
+.neon-glow-glow {
+  box-shadow: 0 0 30px rgba(108, 99, 255, 0.35);
+  border-color: rgba(108, 99, 255, 0.4) !important;
+}
+
+.neon-glow-secondary {
+  box-shadow: 0 0 25px rgba(0, 217, 255, 0.3);
+  border-color: rgba(0, 217, 255, 0.45) !important;
+}
+
+/* Subtle background glowing orb animations */
+@keyframes pulseGlow {
+  0%, 100% {
+    transform: scale(1) translate(0px, 0px);
+    opacity: 0.12;
+  }
+  50% {
+    transform: scale(1.15) translate(25px, -25px);
+    opacity: 0.22;
+  }
+}
+
+/* Premium Drifting background circles */
+@keyframes driftCircleOne {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(60px, 100px) scale(1.15);
+  }
+  66% {
+    transform: translate(-80px, 40px) scale(0.85);
+  }
+}
+
+@keyframes driftCircleTwo {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(-100px, -60px) scale(0.85);
+  }
+  66% {
+    transform: translate(80px, -120px) scale(1.15);
+  }
+}
+
+@keyframes driftCircleThree {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(120px, -40px) scale(1.2);
+  }
+}
+
+.animate-drift-one {
+  animation: driftCircleOne 30s infinite ease-in-out;
+}
+.animate-drift-two {
+  animation: driftCircleTwo 35s infinite ease-in-out;
+}
+.animate-drift-three {
+  animation: driftCircleThree 40s infinite ease-in-out;
+}
+
+.animate-pulse-glow {
+  shadow-blur: 50px;
+  animation: pulseGlow 14s infinite ease-in-out;
 }
 
 /* Hide scrollbar for cleaner UI where needed */

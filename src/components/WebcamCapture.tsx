@@ -335,7 +335,7 @@ export default function WebcamCapture({ onClose, onSave, currentPhoto }: WebcamC
           {/* Instructional notes in capturing portal */}
           <div className="w-full max-w-[320px] mt-4 bg-gray-50 dark:bg-slate-950 border border-gray-150 dark:border-slate-850 p-3 rounded-xl flex items-start space-x-2">
             <Smile className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
-            <p className="text-[10px] text-gray-550 dark:text-gray-400 leading-relaxed font-sans">
+            <p className="text-[10px] text-gray-500 dark:text-gray-400 leading-relaxed font-sans">
               Keep standard lighting, maintain composure, and click <b>Capture Snapshot</b>. The image will instantly become your administrator profile credential.
             </p>
           </div>

@@ -68,19 +68,19 @@ export default function DbmsQuiz() {
   const gradeInfo = getGradeExplanation(score);
 
   return (
-    <section id="quiz" className="py-24 relative bg-white dark:bg-slate-900 border-b border-gray-100 dark:border-slate-950">
+    <section id="quiz" className="py-24 relative bg-[#0B1020]">
       <div className="container mx-auto px-6">
         
         {/* Title and Badge */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <h2 className="text-sm font-mono tracking-wider uppercase text-emerald-600 dark:text-emerald-400 font-bold">
+          <h2 className="text-sm font-mono tracking-wider uppercase text-[#00D9FF] font-bold">
             Knowledge Check
           </h2>
-          <h1 className="text-3xl md:text-4xl font-display font-extrabold text-gray-900 dark:text-white mt-1">
+          <h1 className="text-3xl md:text-4xl font-display font-extrabold text-[#F8FAFC] mt-1">
             DBMS Interactive Quiz
           </h1>
-          <div className="w-12 h-1 bg-gradient-to-r from-emerald-500 to-teal-500 mx-auto mt-4 rounded-full" />
-          <p className="text-gray-650 dark:text-gray-300 mt-4 text-base font-sans">
+          <div className="w-12 h-1 bg-gradient-to-r from-[#4F8CFF] to-[#6C63FF] mx-auto mt-4 rounded-full" />
+          <p className="text-[#CBD5E1] mt-4 text-base font-sans">
             Ready to test your academic foundation? Solve 10 multiple-choice questions on primary keys, ACID formulas, SQL statements, and normalizations.
           </p>
         </div>
@@ -94,7 +94,7 @@ export default function DbmsQuiz() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
-                className="glass-panel p-6 sm:p-8 rounded-3xl border border-gray-150 dark:border-slate-800 shadow-md bg-white/70 dark:bg-slate-900/40 relative flex flex-col min-h-[480px]"
+                className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/15 shadow-md bg-[#151C33]/60 relative flex flex-col min-h-[480px]"
               >
                 {/* Progress bar state */}
                 <div className="w-full bg-gray-100 dark:bg-slate-800 h-2 rounded-full mb-6 overflow-hidden">
@@ -188,7 +188,7 @@ export default function DbmsQuiz() {
                     <button
                       id="quiz-next-btn"
                       onClick={handleNextQuestion}
-                      className="px-6 py-3.5 bg-gray-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-xl text-sm hover:bg-slate-800 dark:hover:bg-gray-100 active:scale-97 select-none transition flex items-center space-x-2 cursor-pointer"
+                      className="btn-primary px-6 py-3.5 text-white font-bold rounded-xl text-sm active:scale-97 select-none transition flex items-center space-x-2 cursor-pointer"
                     >
                       <span>{currentIdx + 1 === DBMS_QUIZ_QUESTIONS.length ? "Finish Quiz" : "Next Question"}</span>
                       <ArrowRight className="w-4 h-4" />
@@ -202,7 +202,7 @@ export default function DbmsQuiz() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="glass-panel p-8 rounded-3xl border border-gray-150 dark:border-slate-800 shadow-xl bg-white/80 dark:bg-slate-900/50 text-center flex flex-col items-center"
+                className="glass-panel p-8 rounded-3xl border border-white/15 shadow-xl bg-[#151C33]/60 text-center flex flex-col items-center"
               >
                 <div className="p-4 bg-emerald-50 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 rounded-2xl mb-5 border border-emerald-100 dark:border-emerald-900/60 shadow-lg">
                   <Trophy className="w-10 h-10 animate-bounce" />
@@ -258,7 +258,7 @@ export default function DbmsQuiz() {
                 <button
                   id="quiz-restart-btn"
                   onClick={handleRestartQuiz}
-                  className="px-6 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl text-sm shadow-md hover:shadow-xl hover:shadow-blue-500/10 transition flex items-center space-x-2 cursor-pointer"
+                  className="btn-primary px-6 py-3.5 text-white font-bold rounded-xl text-sm transition flex items-center space-x-2 cursor-pointer"
                 >
                   <RotateCcw className="w-4 h-4" />
                   <span>Restart Practicing</span>

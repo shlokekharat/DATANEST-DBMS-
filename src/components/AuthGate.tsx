@@ -97,7 +97,7 @@ export default function AuthGate({
       <div className="p-8">
         {/* Header Icon Block */}
         <div className="flex flex-col items-center text-center space-y-3 mb-6">
-          <div className="p-3 bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 rounded-2xl border border-blue-1e0/50 dark:border-blue-900/40">
+          <div className="p-3 bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 rounded-2xl border border-blue-100/50 dark:border-blue-900/40">
             <ShieldAlert className="w-6 h-6 animate-pulse" />
           </div>
           <h3 className="text-xl font-display font-bold text-gray-950 dark:text-white">
@@ -129,7 +129,7 @@ export default function AuthGate({
             className={`py-2 px-3 rounded-lg text-xs font-semibold flex items-center justify-center space-x-1.5 transition cursor-pointer ${
               activeTab === 'register'
                 ? 'bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 shadow-sm'
-                : 'text-gray-505 text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'
+                : 'text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'
             }`}
           >
             <UserPlus className="w-3.5 h-3.5" />
@@ -253,7 +253,7 @@ export default function AuthGate({
           type="button"
           onClick={handleGoogleAuth}
           disabled={submitting}
-          className="w-full py-2.5 px-4 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-slate-755 rounded-xl text-xs font-bold transition flex items-center justify-center space-x-2.5 active:scale-98 cursor-pointer disabled:opacity-50"
+          className="w-full py-2.5 px-4 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-slate-700 rounded-xl text-xs font-bold transition flex items-center justify-center space-x-2.5 active:scale-98 cursor-pointer disabled:opacity-50"
         >
           <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
             <path

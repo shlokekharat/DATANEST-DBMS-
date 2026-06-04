@@ -71,21 +71,21 @@ export default function ErDiagram() {
   const [selectedEntity, setSelectedEntity] = useState<string>("Student");
 
   return (
-    <section id="er-diagram" className="py-24 bg-gray-50/50 dark:bg-slate-950/20 relative">
-      <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] dark:bg-[radial-gradient(#334155_1px,transparent_1px)] bg-[size:16px_16px] opacity-30 pointer-events-none" />
+    <section id="er-diagram" className="py-24 relative bg-[#0B1020] border-b border-white/10">
+      <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] bg-[size:16px_16px] opacity-35 pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
         
         {/* Header Title */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-sm font-mono tracking-wider uppercase text-blue-600 dark:text-blue-400 font-bold">
+          <h2 className="text-sm font-mono tracking-wider uppercase text-[#00D9FF] font-bold">
             Schema Mapping Model
           </h2>
-          <h1 className="text-3xl md:text-4xl font-display font-extrabold text-gray-900 dark:text-white mt-1">
+          <h1 className="text-3xl md:text-4xl font-display font-extrabold text-[#F8FAFC] mt-1">
             Student Management ER Diagram
           </h1>
-          <div className="w-12 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto mt-4 rounded-full" />
-          <p className="text-gray-600 dark:text-gray-300 mt-4 text-base font-sans">
+          <div className="w-12 h-1 bg-gradient-to-r from-[#00D9FF] to-[#4F8CFF] mx-auto mt-4 rounded-full" />
+          <p className="text-[#94A3B8] mt-4 text-base font-sans">
             Explore relationships mapping university components. Click any colored Entity box to examine primary keys, composite columns, and cardinality formulas in the dashboard sidebar.
           </p>
         </div>
@@ -95,15 +95,15 @@ export default function ErDiagram() {
           
           {/* Interactive SVG Diagram Node Canvas */}
           <div className="lg:col-span-7 flex flex-col space-y-4">
-            <div className="glass-panel p-5 rounded-2xl border border-gray-150 dark:border-slate-800 shadow-sm overflow-hidden bg-white/65 dark:bg-slate-900/60 flex flex-col justify-between">
+            <div className="glass-panel p-5 rounded-2xl border border-white/10 shadow-sm overflow-hidden bg-[#151C33]/65 text-[#F8FAFC] flex flex-col justify-between">
               
               {/* Header tags and status */}
-              <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100 dark:border-slate-800">
-                <span className="text-[11px] font-mono text-gray-500 flex items-center space-x-1.5 font-bold uppercase">
-                  <Network className="w-3.5 h-3.5 text-indigo-500" />
+              <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/5">
+                <span className="text-[11px] font-mono text-[#94A3B8] flex items-center space-x-1.5 font-bold uppercase">
+                  <Network className="w-3.5 h-3.5 text-[#4F8CFF]" />
                   <span>Interactive Vector Schema Canvas</span>
                 </span>
-                <span className="text-[10px] bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 font-mono px-2 py-0.5 rounded border border-emerald-100 dark:border-emerald-900">
+                <span className="text-[10px] bg-emerald-500/10 text-emerald-400 font-mono px-2 py-0.5 rounded border border-emerald-500/20">
                   Total Entities: 4
                 </span>
               </div>
@@ -115,20 +115,20 @@ export default function ErDiagram() {
                     {/* Define SVG marker arrow caps */}
                     <defs>
                       <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                        <path d="M 0 0 L 10 5 L 0 10 z" className="fill-slate-400 dark:fill-slate-600" />
+                        <path d="M 0 0 L 10 5 L 0 10 z" className="fill-[#94A3B8]/60" />
                       </marker>
                     </defs>
 
                     {/* Connective links lines between blocks with cardinality numbers */}
                     
                     {/* Faculty (1) -- Teaches -- Course (N) */}
-                    <line x1="100" y1="90" x2="290" y2="90" className="stroke-slate-350 dark:stroke-slate-700 stroke-2 stroke-dashed" />
+                    <line x1="100" y1="90" x2="290" y2="90" className="stroke-white/10 stroke-2 stroke-dashed" />
                     
                     {/* Student (1) -- Enrolls in -- Enrollment (N) */}
-                    <line x1="100" y1="270" x2="290" y2="270" className="stroke-slate-350 dark:stroke-slate-700 stroke-2" />
+                    <line x1="100" y1="270" x2="290" y2="270" className="stroke-white/10 stroke-2" />
                     
                     {/* Enrollment (N) -- Course (1) */}
-                    <line x1="390" y1="270" x2="390" y2="120" className="stroke-slate-350 dark:stroke-slate-700 stroke-2" />
+                    <line x1="390" y1="270" x2="390" y2="120" className="stroke-white/10 stroke-2" />
                   </svg>
 
                   {/* HTML Overlay nodes positioned absolutely for absolute responsive alignment and rich hover states info */}
@@ -138,32 +138,32 @@ export default function ErDiagram() {
                     onClick={() => setSelectedEntity("Faculty")}
                     className={`absolute left-4 top-10 w-24 p-3 rounded-xl border text-center transition-all duration-300 cursor-pointer shadow-sm ${
                       selectedEntity === "Faculty" 
-                        ? "bg-purple-100 border-purple-400 text-purple-900 dark:bg-purple-950 dark:border-purple-800 dark:text-purple-300 scale-105 ring-2 ring-purple-400/20" 
-                        : "bg-white border-gray-200 text-gray-800 dark:bg-slate-900 dark:border-slate-800 dark:text-slate-300 hover:border-purple-300"
+                        ? "bg-[#6C63FF]/20 border-[#6C63FF]/60 text-[#F8FAFC] scale-105 ring-2 ring-[#6C63FF]/30" 
+                        : "bg-[#0B1020] border-white/10 text-[#94A3B8] hover:border-[#6C63FF]/40"
                     }`}
                   >
-                    <p className="text-[10px] font-mono font-bold text-purple-500 uppercase">Faculty</p>
-                    <p className="text-xs font-bold font-display mt-0.5">Faculty_ID</p>
+                    <p className="text-[10px] font-mono font-bold text-[#6C63FF] uppercase">Faculty</p>
+                    <p className="text-xs font-bold font-display mt-0.5 text-[#F8FAFC]">Faculty_ID</p>
                   </div>
 
                   {/* Relationship Diamond: Teaches */}
-                  <div className="absolute left-[154px] top-[74px] w-18 h-8 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg flex items-center justify-center rotate-45 shadow-sm transform">
-                    <span className="text-[9px] font-mono font-bold text-slate-500 dark:text-slate-400 -rotate-45 block">TEACHES</span>
+                  <div className="absolute left-[154px] top-[74px] w-18 h-8 bg-[#0B1020] border border-white/10 rounded-lg flex items-center justify-center rotate-45 shadow-sm transform">
+                    <span className="text-[9px] font-mono font-bold text-[#94A3B8] -rotate-44 block">TEACHES</span>
                   </div>
-                  <div className="absolute left-[134px] top-[60px] text-[10px] font-mono font-bold text-slate-400">1</div>
-                  <div className="absolute left-[200px] top-[60px] text-[10px] font-mono font-bold text-slate-400">N</div>
+                  <div className="absolute left-[134px] top-[60px] text-[10px] font-mono font-bold text-[#94A3B8]">1</div>
+                  <div className="absolute left-[200px] top-[60px] text-[10px] font-mono font-bold text-[#94A3B8]">N</div>
 
                   {/* Category 2: COURSE Node */}
                   <div 
                     onClick={() => setSelectedEntity("Course")}
                     className={`absolute left-72 top-10 w-24 p-3 rounded-xl border text-center transition-all duration-300 cursor-pointer shadow-sm ${
                       selectedEntity === "Course" 
-                        ? "bg-indigo-100 border-indigo-400 text-indigo-900 dark:bg-indigo-950 dark:border-indigo-800 dark:text-indigo-300 scale-105 ring-2 ring-indigo-400/20" 
-                        : "bg-white border-gray-200 text-gray-800 dark:bg-slate-900 dark:border-slate-800 dark:text-slate-300 hover:border-indigo-300"
+                        ? "bg-[#4F8CFF]/20 border-[#4F8CFF]/60 text-[#F8FAFC] scale-105 ring-2 ring-[#4F8CFF]/30" 
+                        : "bg-[#0B1020] border-white/10 text-[#94A3B8] hover:border-[#4F8CFF]/40"
                     }`}
                   >
-                    <p className="text-[10px] font-mono font-bold text-indigo-500 uppercase">Course</p>
-                    <p className="text-xs font-bold font-display mt-0.5">Course_Code</p>
+                    <p className="text-[10px] font-mono font-bold text-[#4F8CFF] uppercase">Course</p>
+                    <p className="text-xs font-bold font-display mt-0.5 text-[#F8FAFC]">Course_Code</p>
                   </div>
 
                   {/* Category 3: STUDENT Node */}
@@ -171,53 +171,53 @@ export default function ErDiagram() {
                     onClick={() => setSelectedEntity("Student")}
                     className={`absolute left-4 top-54 w-24 p-3 rounded-xl border text-center transition-all duration-300 cursor-pointer shadow-sm ${
                       selectedEntity === "Student" 
-                        ? "bg-blue-100 border-blue-400 text-blue-900 dark:bg-blue-950 dark:border-blue-850 dark:text-blue-300 scale-105 ring-2 ring-blue-400/20" 
-                        : "bg-white border-gray-200 text-gray-800 dark:bg-slate-900 dark:border-slate-800 dark:text-slate-300 hover:border-blue-300"
+                        ? "bg-[#00D9FF]/20 border-[#00D9FF]/60 text-[#F8FAFC] scale-105 ring-2 ring-[#00D9FF]/30" 
+                        : "bg-[#0B1020] border-white/10 text-[#94A3B8] hover:border-[#00D9FF]/40"
                     }`}
                   >
-                    <p className="text-[10px] font-mono font-bold text-blue-500 uppercase">Student</p>
-                    <p className="text-xs font-bold font-display mt-0.5">RollNo</p>
+                    <p className="text-[10px] font-mono font-bold text-[#00D9FF] uppercase">Student</p>
+                    <p className="text-xs font-bold font-display mt-0.5 text-[#F8FAFC]">RollNo</p>
                   </div>
 
                   {/* Relationship Diamond: Enrolls */}
-                  <div className="absolute left-[154px] top-[254px] w-18 h-8 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg flex items-center justify-center rotate-45 shadow-sm transform">
-                    <span className="text-[8px] font-mono font-bold text-slate-500 dark:text-slate-400 -rotate-45 block">ENROLLS</span>
+                  <div className="absolute left-[154px] top-[254px] w-18 h-8 bg-[#0B1020] border border-white/10 rounded-lg flex items-center justify-center rotate-45 shadow-sm transform">
+                    <span className="text-[8px] font-mono font-bold text-[#94A3B8] -rotate-44 block">ENROLLS</span>
                   </div>
-                  <div className="absolute left-[134px] top-[240px] text-[10px] font-mono font-bold text-slate-400">1</div>
-                  <div className="absolute left-[200px] top-[240px] text-[10px] font-mono font-bold text-slate-400">N</div>
+                  <div className="absolute left-[134px] top-[240px] text-[10px] font-mono font-bold text-[#94A3B8]">1</div>
+                  <div className="absolute left-[200px] top-[240px] text-[10px] font-mono font-bold text-[#94A3B8]">N</div>
 
                   {/* Category 4: ENROLLMENT weak associative Node */}
                   <div 
                     onClick={() => setSelectedEntity("Enrollment")}
                     className={`absolute left-72 top-54 w-24 p-3 rounded-xl border text-center border-dashed transition-all duration-300 cursor-pointer shadow-sm ${
                       selectedEntity === "Enrollment" 
-                        ? "bg-emerald-100 border-emerald-400 text-emerald-900 dark:bg-emerald-950 dark:border-emerald-800 dark:text-emerald-300 scale-105 ring-2 ring-emerald-400/20" 
-                        : "bg-white border-emerald-350 text-gray-850 dark:bg-slate-905 dark:border-emerald-900 dark:text-emerald-300 hover:border-emerald-500"
+                        ? "bg-emerald-500/20 border-emerald-500/60 text-[#F8FAFC] scale-105 ring-2 ring-emerald-500/30" 
+                        : "bg-[#0B1020] border-white/10 text-[#94A3B8] hover:border-emerald-500/40"
                     }`}
                   >
-                    <p className="text-[9px] font-mono font-bold text-emerald-500 uppercase">Enrollment</p>
-                    <p className="text-xs font-bold font-display mt-0.5">Enroll_ID</p>
+                    <p className="text-[9px] font-mono font-bold text-emerald-400 uppercase">Enrollment</p>
+                    <p className="text-xs font-bold font-display mt-0.5 text-[#F8FAFC]">Enroll_ID</p>
                   </div>
 
                   {/* Relationship connector enrollment course: Of_Course */}
-                  <div className="absolute left-[304px] top-[164px] w-18 h-8 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg flex items-center justify-center rotate-45 shadow-sm transform">
-                    <span className="text-[9px] font-mono font-bold text-slate-500 dark:text-slate-400 -rotate-45 block">FOR</span>
+                  <div className="absolute left-[304px] top-[164px] w-18 h-8 bg-[#0B1020] border border-white/10 rounded-lg flex items-center justify-center rotate-45 shadow-sm transform">
+                    <span className="text-[9px] font-mono font-bold text-[#94A3B8] -rotate-44 block">FOR</span>
                   </div>
-                  <div className="absolute left-[334px] top-[190px] text-[10px] font-mono font-bold text-slate-400">N</div>
-                  <div className="absolute left-[334px] top-[138px] text-[11px] font-mono font-bold text-slate-400">1</div>
+                  <div className="absolute left-[334px] top-[190px] text-[10px] font-mono font-bold text-[#94A3B8]">N</div>
+                  <div className="absolute left-[334px] top-[138px] text-[11px] font-mono font-bold text-[#94A3B8]">1</div>
 
                   {/* Floating oval attributes visually linked to Student for aesthetic completeness */}
-                  <div className="absolute left-[14px] top-[170px] px-2 py-0.5 bg-slate-50 dark:bg-slate-900 border border-slate-205 dark:border-slate-800 text-[9px] font-mono rounded-full text-slate-450">RollNo</div>
-                  <div className="absolute left-[110px] top-[210px] px-2 py-0.5 bg-slate-50 dark:bg-slate-900 border border-slate-205 dark:border-slate-800 text-[9px] font-mono rounded-full text-slate-450">Name</div>
-                  <div className="absolute left-[118px] top-[164px] px-2 py-0.5 bg-slate-50 dark:bg-slate-900 border border-slate-205 dark:border-slate-800 text-[9px] font-mono rounded-full text-slate-450">Department</div>
+                  <div className="absolute left-[14px] top-[170px] px-2 py-0.5 bg-[#0B1020] border border-white/10 text-[9px] font-mono rounded-full text-[#94A3B8]">RollNo</div>
+                  <div className="absolute left-[110px] top-[210px] px-2 py-0.5 bg-[#0B1020] border border-white/10 text-[9px] font-mono rounded-full text-[#94A3B8]">Name</div>
+                  <div className="absolute left-[118px] top-[164px] px-2 py-0.5 bg-[#0B1020] border border-white/10 text-[9px] font-mono rounded-full text-[#94A3B8]">Department</div>
                 </div>
               </div>
 
               {/* Help Hint */}
-              <div className="p-3 bg-gray-50 dark:bg-slate-950/60 rounded-xl border border-gray-100 dark:border-slate-850 text-[10px] text-gray-500 dark:text-slate-400 font-sans flex items-start space-x-2">
-                <HelpCircle className="w-4 h-4 text-indigo-500 shrink-0 mt-0.5" />
+              <div className="p-3 bg-[#0B1020]/80 rounded-xl border border-white/5 text-[10px] text-[#94A3B8] font-sans flex items-start space-x-2">
+                <HelpCircle className="w-4 h-4 text-[#4F8CFF] shrink-0 mt-0.5" />
                 <p>
-                  The dashed box represents an <strong className="text-gray-900 dark:text-white font-semibold">Associative Weak Entity</strong>, which acts as a bridge to resolve a Many-to-Many dependency mapping (Student enrollment courses) into tidy binary One-to-Many relationships.
+                  The dashed box represents an <strong className="text-white font-semibold">Associative Weak Entity</strong>, which acts as a bridge to resolve a Many-to-Many dependency mapping (Student enrollment courses) into tidy binary One-to-Many relationships.
                 </p>
               </div>
             </div>
@@ -225,31 +225,31 @@ export default function ErDiagram() {
 
           {/* Interactive attribute inspector panel */}
           <div className="lg:col-span-5">
-            <div className="glass-panel p-5 rounded-2xl border border-gray-150 dark:border-slate-800 shadow-sm flex flex-col h-full bg-white/65 dark:bg-slate-900/60 justify-between">
+            <div className="glass-panel p-5 rounded-2xl border border-white/10 shadow-sm flex flex-col h-full bg-[#151C33]/65 text-[#F8FAFC] justify-between">
               <div>
                 {/* Selected Heading */}
-                <div className="pb-4 border-b border-gray-100 dark:border-slate-800 mb-4 flex items-center justify-between">
+                <div className="pb-4 border-b border-white/5 mb-4 flex items-center justify-between">
                   <div>
-                    <span className="text-[10px] font-mono font-bold uppercase text-indigo-500">
+                    <span className="text-[10px] font-mono font-bold uppercase text-indigo-400">
                       {ENTITY_SCHEMAS[selectedEntity].type}
                     </span>
-                    <h3 className="text-xl font-display font-extrabold text-blue-900 dark:text-white mt-0.5">
+                    <h3 className="text-xl font-display font-extrabold text-[#F8FAFC] mt-0.5">
                       {selectedEntity} Entity Structure
                     </h3>
                   </div>
-                  <div className="px-3 py-1 bg-blue-50 dark:bg-slate-820 rounded-xl text-blue-600 dark:text-blue-400 font-bold font-mono text-xs">
+                  <div className="px-3 py-1 bg-[#4F8CFF]/10 border border-[#4F8CFF]/20 rounded-xl text-[#4F8CFF] font-bold font-mono text-xs">
                     RDBMS Block
                   </div>
                 </div>
 
-                <p className="text-xs text-slate-600 dark:text-slate-350 font-sans leading-relaxed mb-5">
+                <p className="text-xs text-[#94A3B8] font-sans leading-relaxed mb-5">
                   {ENTITY_SCHEMAS[selectedEntity].desc}
                 </p>
 
                 {/* Attributes breakdown label list */}
                 <div className="space-y-3">
-                  <h4 className="text-xs font-mono font-bold text-gray-400 uppercase tracking-widest flex items-center space-x-1.5">
-                    <TableProperties className="w-3.5 h-3.5 text-indigo-500" />
+                  <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest flex items-center space-x-1.5">
+                    <TableProperties className="w-3.5 h-3.5 text-[#4F8CFF]" />
                     <span>Table Field Attribute Declarations</span>
                   </h4>
 
@@ -257,27 +257,27 @@ export default function ErDiagram() {
                     {ENTITY_SCHEMAS[selectedEntity].attributes.map((attr, index) => (
                       <div 
                         key={index} 
-                        className="p-2.5 bg-gray-50/70 dark:bg-slate-950/40 rounded-xl border border-gray-100/50 dark:border-slate-800/40 flex items-center justify-between"
+                        className="p-2.5 bg-[#0B1020] rounded-xl border border-white/5 flex items-center justify-between"
                       >
                         <div className="flex items-center space-x-1.5 min-w-0">
                           {attr.isPK && <Key className="w-3.5 h-3.5 text-yellow-500 shrink-0" />}
-                          {attr.isFK && <ShieldCheck className="w-3.5 h-3.5 text-blue-500 shrink-0" />}
-                          <span className="font-mono text-xs font-bold text-gray-800 dark:text-white truncate">
+                          {attr.isFK && <ShieldCheck className="w-3.5 h-3.5 text-[#4F8CFF] shrink-0" />}
+                          <span className="font-mono text-xs font-bold text-[#F8FAFC] truncate">
                             {attr.name}
                           </span>
                         </div>
                         
                         <div className="flex items-center space-x-2 shrink-0">
-                          <span className="text-[10px] font-mono text-gray-400 font-bold bg-gray-200/50 dark:bg-slate-800 px-2 py-0.5 rounded">
+                          <span className="text-[10px] font-mono text-slate-400 font-bold bg-[#151C33] px-2 py-0.5 rounded">
                             {attr.type}
                           </span>
                           {attr.isPK && (
-                            <span className="text-[8px] font-mono bg-yellow-50 dark:bg-yellow-950 text-yellow-600 dark:text-yellow-400 border border-yellow-100 dark:border-yellow-900 px-1 py-0.5 rounded font-bold">
+                            <span className="text-[8px] font-mono bg-yellow-500/10 text-yellow-500 border border-yellow-500/20 px-1 py-0.5 rounded font-bold">
                               PK
                             </span>
                           )}
                           {attr.isFK && (
-                            <span className="text-[8px] font-mono bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-900 px-1 py-0.5 rounded font-bold">
+                            <span className="text-[8px] font-mono bg-[#4F8CFF]/10 text-[#4F8CFF] border border-[#4F8CFF]/20 px-1 py-0.5 rounded font-bold">
                               FK
                             </span>
                           )}
@@ -289,11 +289,11 @@ export default function ErDiagram() {
               </div>
 
               {/* Relationship label summary */}
-              <div className="mt-5 p-3.5 bg-slate-900 dark:bg-slate-950 rounded-xl text-xs text-indigo-300 font-sans border border-slate-800">
-                <span className="font-mono font-extrabold text-white text-[10px] uppercase tracking-wider block mb-1">
+              <div className="mt-5 p-3.5 bg-[#0B1020] rounded-xl text-xs text-[#00D9FF] font-sans border border-white/5">
+                <span className="font-mono font-extrabold text-[#F8FAFC] text-[10px] uppercase tracking-wider block mb-1">
                   🌐 Cardinality and Relationships Mapping
                 </span>
-                <p className="text-slate-400 text-[11px] leading-relaxed">
+                <p className="text-[#94A3B8] text-[11px] leading-relaxed">
                   {ENTITY_SCHEMAS[selectedEntity].relationships}
                 </p>
               </div>

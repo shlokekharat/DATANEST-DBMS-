@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Database, Sun, Moon, Sparkles, LogIn, Menu, X, LogOut, User } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import Logo from './Logo';
 
 interface NavbarProps {
   currentSection: string;
@@ -47,63 +48,88 @@ export default function Navbar({ currentSection, onNavigate }: NavbarProps) {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 bg-white/85 dark:bg-slate-950/85 backdrop-blur-md border-b border-gray-150 dark:border-slate-850">
+    <header className="fixed top-0 left-0 right-0 z-40 bg-[#0B1020]/80 backdrop-blur-md border-b border-white/10">
       <div className="container mx-auto px-6">
         
         {/* Main upper line: logo & system controls */}
         <div className="flex items-center justify-between h-14">
           
           {/* Logo brand */}
-          <div 
+          <Logo 
             onClick={() => handleLinkClick('home')}
-            className="flex items-center space-x-2.5 cursor-pointer select-none group"
-          >
-            <div className="p-2 bg-gradient-to-tr from-blue-600 to-indigo-600 text-white rounded-xl shadow-md shadow-blue-500/10 group-hover:scale-105 duration-200">
-              <Database className="w-5 h-5 animate-pulse" />
-            </div>
-            <div>
-              <span className="text-xl font-display font-black tracking-tight text-gray-950 dark:text-white uppercase">
-                DATANEST
-              </span>
-              <span className="hidden sm:inline-block text-[10px] font-mono text-blue-600 dark:text-blue-400 font-bold ml-2 bg-blue-50 dark:bg-blue-950/50 px-2 py-0.5 rounded border border-blue-100 dark:border-blue-900/40">
-                Academic Pro v2.0
-              </span>
-            </div>
-          </div>
+            size="md"
+          />
 
           {/* Right end accessories */}
           <div className="flex items-center space-x-4">
             
-            {/* Theme Toggle (Light/Dark mode) */}
-            <button
-              id="theme-toggle-btn"
-              onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-xl text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-800/80 transition cursor-pointer"
-              title="Toggle theme (Light / Dark)"
-            >
-              {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-600" />}
-            </button>
+            {/* Elegant Segmented Theme Switcher */}
+            <div id="theme-navigation-segmented" className="relative flex items-center bg-[#151C33]/90 border border-white/15 p-1 rounded-2xl shadow-inner select-none shrink-0 h-9">
+              {/* Sliding glass bubble background */}
+              {!isDark ? (
+                <motion.div
+                  layoutId="active-theme-bg"
+                  className="absolute inset-y-1 left-1 bg-white/15 border border-white/20 rounded-xl shadow-sm"
+                  style={{ right: '50%' }}
+                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                />
+              ) : (
+                <motion.div
+                  layoutId="active-theme-bg"
+                  className="absolute inset-y-1 right-1 bg-slate-800 border border-slate-705/80 rounded-xl shadow-sm"
+                  style={{ left: '50%' }}
+                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                />
+              )}
+
+              <button
+                id="theme-selector-light-btn"
+                onClick={() => setIsDark(false)}
+                className={`relative z-10 flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-[10px] font-mono font-extrabold uppercase tracking-wider transition-colors duration-200 cursor-pointer ${
+                  !isDark 
+                    ? 'text-[#4F8CFF]' 
+                    : 'text-[#94A3B8] hover:text-[#F8FAFC]'
+                }`}
+                title="Switch to Light Theme"
+              >
+                <Sun className="w-3.5 h-3.5 text-amber-500" />
+                <span className="hidden xs:inline">Light</span>
+              </button>
+              <button
+                id="theme-selector-dark-btn"
+                onClick={() => setIsDark(true)}
+                className={`relative z-10 flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-[10px] font-mono font-extrabold uppercase tracking-wider transition-colors duration-200 cursor-pointer ${
+                  isDark 
+                    ? 'text-amber-400' 
+                    : 'text-[#94A3B8] hover:text-[#F8FAFC]'
+                }`}
+                title="Switch to Dark Theme"
+              >
+                <Moon className={`w-3.5 h-3.5 ${isDark ? 'text-amber-400 animate-pulse' : 'text-gray-405'}`} />
+                <span className="hidden xs:inline">Dark</span>
+              </button>
+            </div>
 
             {/* Dynamic User Profile / Workspace State */}
             {user ? (
               <div className="flex items-center space-x-2">
-                <div className="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 text-gray-700 dark:text-gray-300 rounded-xl text-xs font-semibold shadow-sm">
+                <div className="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 bg-[#151C33]/85 border border-white/15 text-[#F8FAFC] rounded-xl text-xs font-semibold shadow-sm">
                   {user.photoURL || localPhoto ? (
                     <img
                       src={user.photoURL || localPhoto || ''}
                       alt="Profile"
-                      className="w-5 h-5 rounded-full object-cover border border-blue-500 shrink-0"
+                      className="w-5 h-5 rounded-full object-cover border border-[#4F8CFF] shrink-0"
                       referrerPolicy="no-referrer"
                     />
                   ) : (
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="w-2 h-2 rounded-full bg-[#22C55E] animate-pulse" />
                   )}
-                  <span className="max-w-[120px] truncate">{user.displayName || user.email}</span>
+                  <span className="max-w-[124px] truncate text-[#F8FAFC]">{user.displayName || user.email}</span>
                 </div>
                 <button
                   id="navbar-logout-btn"
                   onClick={() => logout()}
-                  className="p-2 text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950/20 rounded-xl transition cursor-pointer"
+                  className="p-2 text-red-400 hover:text-red-355 hover:bg-red-950/20 rounded-xl transition cursor-pointer"
                   title="Log out from session"
                 >
                   <LogOut className="w-4 h-4" />
@@ -114,7 +140,7 @@ export default function Navbar({ currentSection, onNavigate }: NavbarProps) {
               <button
                 id="header-nav-dashboard-shortcut"
                 onClick={() => handleLinkClick('student-database')}
-                className="hidden md:inline-flex items-center space-x-1.5 px-3.5 py-1.5 bg-gradient-to-r from-blue-50/80 to-indigo-50/80 dark:from-blue-950/20 dark:to-indigo-950/20 text-blue-600 dark:text-blue-450 border border-blue-100 dark:border-blue-900/60 rounded-xl text-xs font-semibold hover:opacity-90 active:scale-97 transition cursor-pointer"
+                className="hidden md:inline-flex items-center space-x-1.5 px-3.5 py-1.5 bg-[#151C33] text-[#4F8CFF] border border-white/15 rounded-xl text-xs font-semibold hover:opacity-90 active:scale-97 transition cursor-pointer"
               >
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Register Hub</span>
@@ -125,7 +151,7 @@ export default function Navbar({ currentSection, onNavigate }: NavbarProps) {
             <button
               id="mobile-nav-toggle-btn"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-xl text-gray-550 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-800 transition cursor-pointer"
+              className="lg:hidden p-2 rounded-xl text-[#94A3B8] hover:bg-[#151C33] transition cursor-pointer"
             >
               {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -144,8 +170,8 @@ export default function Navbar({ currentSection, onNavigate }: NavbarProps) {
                 onClick={() => handleLinkClick(item.id)}
                 className={`px-3.5 py-2 rounded-xl text-xs font-sans font-bold whitespace-nowrap transition cursor-pointer ${
                   isActive 
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/10' 
-                    : 'text-gray-650 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-105/90 dark:hover:bg-slate-900/50'
+                    ? 'bg-[#4F8CFF] text-white shadow-md shadow-[#4F8CFF]/20 neon-glow-primary' 
+                    : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-white/5'
                 }`}
               >
                 {item.label}
@@ -164,7 +190,7 @@ export default function Navbar({ currentSection, onNavigate }: NavbarProps) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white dark:bg-slate-950 border-t border-gray-150 dark:border-slate-850 overflow-hidden shadow-inner flex flex-col"
+            className="lg:hidden bg-[#0B1020] border-t border-white/10 overflow-hidden shadow-inner flex flex-col"
           >
             <div className="p-4 space-y-1.5 text-center flex flex-col">
               {menuItems.map((item) => {
@@ -176,8 +202,8 @@ export default function Navbar({ currentSection, onNavigate }: NavbarProps) {
                     onClick={() => handleLinkClick(item.id)}
                     className={`w-full py-2.5 px-4 rounded-xl text-sm font-semibold transition text-left cursor-pointer ${
                       isActive 
-                        ? 'bg-blue-50 text-blue-600 dark:bg-blue-950/40 dark:text-blue-450 border-l-4 border-blue-600' 
-                        : 'text-gray-650 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-900/60'
+                        ? 'bg-[#151C33] text-[#4F8CFF] border-l-4 border-[#4F8CFF]' 
+                        : 'text-[#94A3B8] hover:bg-[#151C33]'
                     }`}
                   >
                     {item.label}
@@ -192,7 +218,7 @@ export default function Navbar({ currentSection, onNavigate }: NavbarProps) {
                     setIsMobileMenuOpen(false);
                     logout();
                   }}
-                  className="w-full mt-2 py-2.5 px-4 rounded-xl text-sm font-semibold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/20 text-left flex items-center space-x-2 transition cursor-pointer"
+                  className="w-full mt-2 py-2.5 px-4 rounded-xl text-sm font-semibold text-red-400 hover:bg-red-950/20 text-left flex items-center space-x-2 transition cursor-pointer"
                 >
                   <LogOut className="w-4 h-4" />
                   <span>Log Out ({user.displayName || user.email})</span>
