@@ -1,0 +1,6 @@
+{
+  "name": "DATANEST",
+  "description": "DBMS Learning Hub & CRUD Management System. Learn database concepts, practice using the SQL playground, explore ER diagrams, test your knowledge with a quiz, and manage student records via a premium admin dashboard.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

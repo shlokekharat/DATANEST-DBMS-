@@ -1,0 +1,104 @@
+{
+  "entities": {
+    "students": {
+      "title": "students",
+      "description": "Student academic records stored securely",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Roll number or identifier of the student"
+        },
+        "name": {
+          "type": "string",
+          "description": "Full name of the student"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the student"
+        },
+        "mobile": {
+          "type": "string",
+          "description": "Contact number"
+        },
+        "department": {
+          "type": "string",
+          "description": "Academic department"
+        },
+        "course": {
+          "type": "string",
+          "description": "Enrolled database course name"
+        },
+        "city": {
+          "type": "string",
+          "description": "Resident city"
+        },
+        "address": {
+          "type": "string",
+          "description": "Residential address details"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Active", "Inactive"],
+          "description": "Academic status"
+        },
+        "ownerId": {
+          "type": "string",
+          "description": "Firebase UID of the record owner"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "name", "email", "ownerId"]
+    },
+    "logs": {
+      "title": "logs",
+      "description": "Audit log records tracking mutations and backups",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique transaction log ID"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["add", "update", "delete", "backup"],
+          "description": "Action category"
+        },
+        "message": {
+          "type": "string",
+          "description": "System or change message"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "User local formatted time"
+        },
+        "ownerId": {
+          "type": "string",
+          "description": "Firebase UID of the log owner"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "type", "message", "ownerId"]
+    }
+  },
+  "firestore": {
+    "students/{studentId}": {
+      "schema": "students",
+      "description": "Isolated collections of student records indexed by studentId and secured by ownerId"
+    },
+    "logs/{logId}": {
+      "schema": "logs",
+      "description": "Audit logging events for students, databases and backups secured by ownerId"
+    }
+  }
+}

@@ -1,0 +1,85 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // 1. Global Safety Net (default-deny)
+    match /{document=**} {
+      allow read, write: if false;
+    }
+    
+    // 3. Reusable Global Primitive Helpers
+    function isValidId(id) { 
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); 
+    }
+    function incoming() { 
+      return request.resource.data; 
+    }
+    function existing() { 
+      return resource.data; 
+    }
+    function isSignedIn() { 
+      return request.auth != null; 
+    }
+    
+    // 2. Strict Validation Blueprints (Anti-Update-Gap)
+    function isValidStudent(data) {
+      return data.keys().hasAll(['id', 'name', 'email', 'mobile', 'department', 'course', 'city', 'address', 'status', 'ownerId', 'createdAt', 'updatedAt'])
+        && data.keys().size() == 12
+        && data.id is string && data.id.size() <= 64
+        && data.name is string && data.name.size() <= 128
+        && data.email is string && data.email.size() <= 128
+        && data.mobile is string && data.mobile.size() <= 32
+        && data.department is string && data.department.size() <= 128
+        && data.course is string && data.course.size() <= 128
+        && data.city is string && data.city.size() <= 128
+        && data.address is string && data.address.size() <= 256
+        && (data.status == 'Active' || data.status == 'Inactive')
+        && data.ownerId == request.auth.uid;
+    }
+    
+    function isValidLog(data) {
+      return data.keys().hasAll(['id', 'type', 'message', 'timestamp', 'ownerId', 'createdAt'])
+        && data.keys().size() == 6
+        && data.id is string && data.id.size() <= 128
+        && (data.type == 'add' || data.type == 'update' || data.type == 'delete' || data.type == 'backup')
+        && data.message is string && data.message.size() <= 512
+        && data.timestamp is string && data.timestamp.size() <= 64
+        && data.ownerId == request.auth.uid;
+    }
+
+    // matched collections rules
+    match /students/{studentId} {
+      allow get: if isSignedIn() && existing().ownerId == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.ownerId == request.auth.uid;
+      
+      allow create: if isSignedIn() 
+        && isValidId(studentId)
+        && isValidStudent(incoming())
+        && incoming().createdAt == request.time
+        && incoming().updatedAt == request.time;
+        
+      allow update: if isSignedIn()
+        && isValidId(studentId)
+        && isValidStudent(incoming())
+        && incoming().ownerId == existing().ownerId
+        && incoming().createdAt == existing().createdAt
+        && incoming().updatedAt == request.time;
+        
+      allow delete: if isSignedIn()
+        && existing().ownerId == request.auth.uid;
+    }
+    
+    match /logs/{logId} {
+      allow get: if isSignedIn() && existing().ownerId == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.ownerId == request.auth.uid;
+      
+      allow create: if isSignedIn()
+        && isValidId(logId)
+        && isValidLog(incoming())
+        && incoming().createdAt == request.time;
+        
+      allow update: if false; // Logs are strictly immutable
+      allow delete: if isSignedIn() && existing().ownerId == request.auth.uid;
+    }
+  }
+}
