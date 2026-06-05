@@ -1,17 +1,10 @@
-// src/firebase-config.ts
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-// ... other Firebase service imports as needed
-
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
-
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-// export other services like firestore, storage as needed
+{
+  "projectId": "leafy-grammar-571nt",
+  "appId": "1:764064215978:web:b33da0d0778996706431d3",
+  "apiKey": "AIzaSyBLZ7m2Ph7vNR3DAmZAz3NxhLIDGgA79qQ",
+  "authDomain": "leafy-grammar-571nt.firebaseapp.com",
+  "firestoreDatabaseId": "ai-studio-460f83f6-5826-483e-9655-6fe9f371f0e3",
+  "storageBucket": "leafy-grammar-571nt.firebasestorage.app",
+  "messagingSenderId": "764064215978",
+  "measurementId": ""
+}
