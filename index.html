@@ -9,5 +9,25 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
+  <!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Firebase App</title>
+</head>
+<body>
+    <h1>Welcome to My Firebase App</h1>
+    <p id="auth-status">Checking authentication status...</p>
+    <button id="sign-in-btn" style="display: none;">Sign In with Google</button>
+    <button id="sign-out-btn" style="display: none;">Sign Out</button>
+
+    <!-- This is crucial: Vite will handle the bundling and inject the correct script tag.
+         Make sure your main entry file path is correct. -->
+    <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
+
 </html>
 
