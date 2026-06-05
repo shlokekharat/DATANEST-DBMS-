@@ -1,33 +1,134 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DATANEST-DBMS-</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-  <!-- index.html -->
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Firebase App</title>
-</head>
-<body>
-    <h1>Welcome to My Firebase App</h1>
-    <p id="auth-status">Checking authentication status...</p>
-    <button id="sign-in-btn" style="display: none;">Sign In with Google</button>
-    <button id="sign-out-btn" style="display: none;">Sign Out</button>
 
-    <!-- This is crucial: Vite will handle the bundling and inject the correct script tag.
-         Make sure your main entry file path is correct. -->
-    <script type="module" src="/src/main.ts"></script>
+    <!-- SEO -->
+    <title>DATANEST | Smart Data Management Made Simple</title>
+    <meta name="description" content="DATANEST - Modern DBMS Learning Hub and CRUD Management Platform.">
+    <meta name="keywords" content="DBMS, CRUD, Database, Dashboard, DATANEST">
+    <meta name="author" content="Shloke Jagan Kharat">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0B1020">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Inter',sans-serif;
+            background:linear-gradient(135deg,#0B1020,#151C33,#0F172A);
+            color:#F8FAFC;
+            overflow:hidden;
+        }
+
+        .loader{
+            position:fixed;
+            inset:0;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            background:#0B1020;
+            z-index:9999;
+        }
+
+        .logo{
+            font-size:42px;
+            font-weight:800;
+            background:linear-gradient(
+                90deg,
+                #00D9FF,
+                #4F8CFF,
+                #6C63FF
+            );
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            letter-spacing:2px;
+        }
+
+        .tagline{
+            margin-top:10px;
+            color:#94A3B8;
+            font-size:15px;
+        }
+
+        .spinner{
+            margin-top:30px;
+            width:50px;
+            height:50px;
+            border:4px solid rgba(255,255,255,0.15);
+            border-top:4px solid #00D9FF;
+            border-radius:50%;
+            animation:spin 1s linear infinite;
+        }
+
+        @keyframes spin{
+            from{
+                transform:rotate(0deg);
+            }
+            to{
+                transform:rotate(360deg);
+            }
+        }
+
+        .footer{
+            position:absolute;
+            bottom:30px;
+            text-align:center;
+            color:#64748B;
+            font-size:13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Loading Screen -->
+
+    <div class="loader">
+
+        <div class="logo">
+            ◈ DATANEST
+        </div>
+
+        <div class="tagline">
+            Smart Data Management Made Simple
+        </div>
+
+        <div class="spinner"></div>
+
+        <div class="footer">
+            Developed by Shloke Jagan Kharat
+            <br>
+            Department of Computer and IoT Engineering
+        </div>
+
+    </div>
+
+    <!-- React / Vite Root -->
+
+    <div id="root"></div>
+
+    <!-- Main Entry -->
+
+    <script type="module" src="/src/main.tsx"></script>
+
 </body>
 </html>
-
-</html>
+```
 
