@@ -19,10 +19,10 @@ export default function Home({ onNavigate }: HomeProps) {
 
   // Simulated live event feed state
   const [recentEvents, setRecentEvents] = useState([
-    { time: '10:02 AM', text: 'Analytics Generated', type: 'analytics' },
-    { time: '09:51 AM', text: 'Database Backup Completed', type: 'backup' },
-    { time: '09:47 AM', text: 'Record Updated', type: 'update' },
-    { time: '09:45 AM', text: 'Student Added', type: 'add' },
+    { id: 'init-1', time: '10:02 AM', text: 'Analytics Generated', type: 'analytics' },
+    { id: 'init-2', time: '09:51 AM', text: 'Database Backup Completed', type: 'backup' },
+    { id: 'init-3', time: '09:47 AM', text: 'Record Updated', type: 'update' },
+    { id: 'init-4', time: '09:45 AM', text: 'Student Added', type: 'add' },
   ]);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ export default function Home({ onNavigate }: HomeProps) {
 
       const chosen = eventPool[Math.floor(Math.random() * eventPool.length)];
       setRecentEvents(prev => [
-        { time: timeStr, text: chosen.text, type: chosen.type },
+        { id: `event-${Date.now()}-${Math.random()}`, time: timeStr, text: chosen.text, type: chosen.type },
         ...prev.slice(0, 3)
       ]);
     }, 7000);
@@ -320,9 +320,9 @@ export default function Home({ onNavigate }: HomeProps) {
                 
                 <div className="space-y-2.5">
                   <AnimatePresence mode="popLayout">
-                    {recentEvents.map((evt, i) => (
+                    {recentEvents.map((evt) => (
                       <motion.div
-                        key={evt.time + evt.text}
+                        key={evt.id}
                         initial={{ opacity: 0, x: -10, y: -5 }}
                         animate={{ opacity: 1, x: 0, y: 0 }}
                         exit={{ opacity: 0, y: 5 }}

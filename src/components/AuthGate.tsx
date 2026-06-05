@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useAuth } from '../context/AuthContext';
 import { ShieldAlert, LogIn, UserPlus, Mail, Lock, User as UserIcon, Sparkles, AlertCircle } from 'lucide-react';
+import firebaseConfig from '../../firebase-applet-config.json';
 
 interface AuthGateProps {
   title?: string;
@@ -20,6 +21,7 @@ export default function AuthGate({
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [showTroubleshoot, setShowTroubleshoot] = useState<'unauthorized-domain' | 'operation-not-allowed' | null>(null);
 
   const resetFields = () => {
     setEmail('');
@@ -27,12 +29,14 @@ export default function AuthGate({
     setDisplayName('');
     setError(null);
     setSuccess(null);
+    setShowTroubleshoot(null);
   };
 
   const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setSuccess(null);
+    setShowTroubleshoot(null);
 
     if (!email || !password) {
       setError("Please fill in all required fields.");
@@ -61,11 +65,17 @@ export default function AuthGate({
     } catch (err: any) {
       console.error(err);
       let errorMsg = err.message || "An unexpected authentication error occurred.";
-      if (err.code === "auth/operation-not-allowed") {
-        errorMsg = "Email/password authentication is not enabled in this Firebase project's console under Build > Authentication > Sign-in method. Please use Google Login instead!";
-      } else if (err.code === "auth/invalid-credential" || err.code === "auth/wrong-password" || err.code === "auth/user-not-found") {
+      const errCode = err.code || "";
+      
+      if (errCode === "auth/operation-not-allowed" || errorMsg.includes("operation-not-allowed")) {
+        errorMsg = "Email/password registration is not yet enabled in your Firebase console. Please go to Build > Authentication > Sign-in method and enable the Email/Password provider.";
+        setShowTroubleshoot('operation-not-allowed');
+      } else if (errCode === "auth/unauthorized-domain" || errorMsg.includes("unauthorized-domain") || errorMsg.includes("unauthorized domain")) {
+        errorMsg = `Login Failed: The domain "${window.location.hostname}" must be authorized in your Firebase console.`;
+        setShowTroubleshoot('unauthorized-domain');
+      } else if (errCode === "auth/invalid-credential" || errCode === "auth/wrong-password" || errCode === "auth/user-not-found" || errorMsg.includes("invalid-credential") || errorMsg.includes("wrong-password")) {
         errorMsg = "Invalid email or password combination.";
-      } else if (err.code === "auth/email-already-in-use") {
+      } else if (errCode === "auth/email-already-in-use" || errorMsg.includes("email-already-in-use")) {
         errorMsg = "This email address is already registered.";
       }
       setError(errorMsg);
@@ -77,13 +87,21 @@ export default function AuthGate({
   const handleGoogleAuth = async () => {
     setError(null);
     setSuccess(null);
+    setShowTroubleshoot(null);
     try {
       setSubmitting(true);
       await loginWithGoogle();
       setSuccess("Authenticated successfully with Google!");
     } catch (err: any) {
       console.error(err);
-      setError(err.message || "Failed to authenticate with Google.");
+      let errorMsg = err.message || "Failed to authenticate with Google.";
+      const errCode = err.code || "";
+      
+      if (errCode === "auth/unauthorized-domain" || errorMsg.includes("unauthorized-domain") || errorMsg.includes("unauthorized domain")) {
+        errorMsg = `Google Login Failed: The domain "${window.location.hostname}" is not authorized. Open your Firebase project console to authorize this host address.`;
+        setShowTroubleshoot('unauthorized-domain');
+      }
+      setError(errorMsg);
     } finally {
       setSubmitting(false);
     }
@@ -280,6 +298,43 @@ export default function AuthGate({
           <p className="text-[10px] text-gray-400 dark:text-gray-500 text-center mt-5 font-mono leading-normal">
             Note: Standard Firebase sandboxes limit mail delivery but fully support Google accounts out-of-the-box.
           </p>
+        )}
+
+        {showTroubleshoot && (
+          <div className="mt-5 p-4 rounded-xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/30 text-xs text-amber-900 dark:text-amber-205 space-y-3 font-sans text-left animate-fadeIn">
+            <div className="flex items-center space-x-2 font-bold select-none text-amber-800 dark:text-amber-300">
+              <Sparkles className="w-4 h-4 text-amber-500 shrink-0" />
+              <span>How to Fix: Firebase Auth Hosting Setup</span>
+            </div>
+            
+            {showTroubleshoot === 'unauthorized-domain' ? (
+              <div className="space-y-2 leading-relaxed text-gray-700 dark:text-gray-300">
+                <p>
+                  This error happens because your hosted domain (<strong className="underline font-mono text-gray-900 dark:text-white">{window.location.hostname}</strong>) is not authorized in your Firebase Project configuration.
+                </p>
+                <p className="font-semibold text-gray-900 dark:text-white">To authorize this domain:</p>
+                <ol className="list-decimal pl-4 space-y-1 text-[11px]">
+                  <li>Open the <a href={`https://console.firebase.google.com/project/${firebaseConfig.projectId}/authentication/settings`} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 font-bold hover:underline inline-flex items-center">Firebase Settings Panel ↗</a></li>
+                  <li>Click on the <strong>Settings</strong> tab, and select <strong>Authorized Domains</strong> near the bottom of your side/inner panel.</li>
+                  <li>Click <strong>Add domain</strong> and paste this host string exactly: <code className="bg-amber-100 dark:bg-amber-900/40 px-1.5 py-0.5 rounded font-mono text-rose-600 dark:text-rose-400 select-all font-bold block mt-1 w-fit">{window.location.hostname}</code></li>
+                  <li>Save the changes, refresh your webpage tab, and try signing in again!</li>
+                </ol>
+              </div>
+            ) : (
+              <div className="space-y-2 leading-relaxed text-gray-700 dark:text-gray-300">
+                <p>
+                  This error occurs because the <strong>Email/Password</strong> provider is disabled in Firebase by default.
+                </p>
+                <p className="font-semibold text-gray-900 dark:text-white">To enable Email/Password:</p>
+                <ol className="list-decimal pl-4 space-y-1 text-[11px]">
+                  <li>Open the <a href={`https://console.firebase.google.com/project/${firebaseConfig.projectId}/authentication/providers`} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 font-bold hover:underline inline-flex items-center">Firebase Sign-in Providers Console ↗</a></li>
+                  <li>Click <strong>Add new provider</strong> (or select <strong>Email/Password</strong> from the native native list).</li>
+                  <li>Toggle the <strong>Email/Password</strong> switch to <strong>Enabled</strong>.</li>
+                  <li>Click <strong>Save</strong>, return here, and try logging in or registering!</li>
+                </ol>
+              </div>
+            )}
+          </div>
         )}
       </div>
     </div>
